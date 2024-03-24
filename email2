@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Validation</title>
+</head>
+<body>
+  <script>
+    function validateEmail() {
+      var email = document.getElementById("email").value;
+      if (email.includes("@") && email.includes(".")) {
+        var parts = email.split("@");
+        var username = parts[0];
+        var domain = parts[1];
+        if (username.length > 0 && domain.length > 0 && domain.charAt(0) !== '.') {
+          var dotIndex = domain.indexOf(".");
+          if (dotIndex != -1 && dotIndex < domain.length - 1) {
+            alert("Email is valid!");
+          } else {
+            alert("Email must have at least two characters after .");
+          }
+        } else {
+          alert("Email must have at least one character before and after @");
+        }
+      } else {
+        alert("Email must contain @ and . characters");
+      }
+    }
+  </script>
+  <h2>Email Validation</h2>
+  <input type="text" id="email" placeholder="Enter your email">
+  <button onclick="validateEmail()">Validate</button>
+</body>
+</html>
