@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Enter the Number</h2><br>
+  <form action="" method="post">
+    Enter the string: <input type="text" name="t1" />
+    <input type="submit" />
+  </form>
+</body>
+</html>
+
+<?php
+if ($_POST) {
+  $s1 = $_POST['t1'];
+  $len = strlen($s1);
+  for ($i = ($len - 1); $i >= 0; $i--) {
+    echo $s1[$i];
+  }
+}
+?>
