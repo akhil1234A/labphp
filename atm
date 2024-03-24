@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Transaction</title>
+</head>
+<body>
+  <h2>Bank Transaction</h2>
+  <form action="process.php" method="POST">
+    Account Number: <input type="text" name="accno"><br><br>
+    Amount: <input type="text" name="amount"><br><br>
+    Transaction Type:
+    <input type="radio" name="transaction" value="Deposit"> Deposit
+    <input type="radio" name="transaction" value="Withdrawal"> Withdrawal<br><br>
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
+
+<?php
+// Database connection
+$conn = mysqli_connect("localhost", "username", "password", "database_name");
+
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $accno = $_POST["accno"];
+  $amount = $_POST["amount"];
+  $transaction = $_POST["transaction"];
+
+  // Fetch current balance from the database
+  $sql = "SELECT balance FROM bank WHERE accno=$accno";
+  $result = mysqli_query($conn, $sql);
+
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $current_balance = $row["balance"];
+
+    // Update balance based on transaction type
+    if ($transaction == "Deposit") {
+      $new_balance = $current_balance + $amount;
+    } else if ($transaction == "Withdrawal") {
+      $new_balance = $current_balance - $amount;
+    }
+
+    // Update balance in the database
+    $update_sql = "UPDATE bank SET balance=$new_balance WHERE accno=$accno";
+    if (mysqli_query($conn, $update_sql)) {
+      echo "Balance updated successfully.";
+    } else {
+      echo "Error updating balance: " . mysqli_error($conn);
+    }
+  } else {
+    echo "Account number not found.";
+  }
+}
+
+mysqli_close($conn);
+?>
