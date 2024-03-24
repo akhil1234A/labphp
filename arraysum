@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>array</title>
+</head>
+<body>
+  <script>
+    function getMyArray(num) {
+      var Array = [];
+      for (let i = 0; i < num; i++) {
+        Array[i] = prompt("Enter array index " + (i + 1) + " value");
+      }
+      var sum = 0;
+      for (let i = 0; i < num; i++) {
+        sum = sum + parseInt(Array[i]);
+      }
+      alert("sum=" + sum);
+    }
+    var num = parseInt(prompt("Enter array limit"));
+    getMyArray(num);
+  </script>
+</body>
+</html>
