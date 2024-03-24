@@ -22,3 +22,18 @@
   </script>
 </body>
 </html>
+
+
+  if (!email) {
+        alert('Please enter an email address.');
+      } else if (email.indexOf('@') === -1) {
+        alert('Email must contain the "@" symbol.');
+      } else if (email.indexOf('.') === -1) {
+        alert('Email must contain the "." character.');
+      } else if (email.split('.').pop().length < 2) {
+        alert('Email must have at least two characters after the dot.');
+      } else if (!emailRegex.test(email)) {
+        alert('Invalid email format.');
+      } else {
+        alert('Email is valid.');
+      }
