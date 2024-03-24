@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplication Table</title>
+</head>
+<body>
+  <h2>Multiplication Table</h2>
+  Enter a number:
+  <input type="number" id="number" min="1" max="10">
+  <button onclick="displayTable()">Show Table</button>
+  <div id="tableResult"></div>
+
+  <script>
+    function displayTable() {
+      var number = document.getElementById("number").value;
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("tableResult").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "multiplication.php?number=" + number, true);
+      xhttp.send();
+    }
+  </script>
+</body>
+</html>
+<?php
+if(isset($_GET['number'])) {
+  $number = $_GET['number'];
+  echo "<h3>Multiplication Table for $number</h3>";
+  echo "<table border='1'>";
+  for ($i = 1; $i <= 10; $i++) {
+    echo "<tr><td>$number * $i</td><td>=</td><td>" . ($number * $i) . "</td></tr>";
+  }
+  echo "</table>";
+}
+?>
