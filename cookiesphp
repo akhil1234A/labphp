@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Last Visited Time</title>
+</head>
+<body bgcolor="red">
+  <center>
+    <h2>Last Visited Time on the Web Page</h2>
+  </center>
+  <br>
+
+  <?php
+  $m = 60 * 60 * 24 * 60 + time();
+  setcookie('lastVisit', date("G:i - m/d/y"), $m);
+
+  if (isset($_COOKIE['lastVisit'])) {
+    $visit = $_COOKIE['lastVisit'];
+    echo "Your last visit was - " . $visit;
+  } else {
+    echo "You have got some state cookies!";
+  }
+  ?>
+
+</body>
+</html>
