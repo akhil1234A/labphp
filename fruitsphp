@@ -1,0 +1,25 @@
+<html >
+<body >
+<form action="" method="POST">
+Choose Your Favorite Fruit <br><br>
+<select name="f">
+<option value=".......">(Please Select)
+<option value="Grape">Grape
+<option value="Banana">Banana
+<option value= "Chicku">Chicku
+<option value="Apple">Apple
+<option value="Orange">Orenge
+<option value="Mango">Mango
+<option value="Pine Apple">Pine Apple
+</select> <br><br>
+<input type="submit" value="SELECT">
+</form>
+</body>
+</html>
+<?php
+if($_POST)
+{
+echo "<h2> You have indicated that you have like </h2>";
+echo $_POST["f"];
+}
+?>
