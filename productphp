@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product List</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h2>Product List</h2>
+  <table>
+    <tr>
+      <th>Item Code</th>
+      <th>Item Name</th>
+      <th>Unit Price</th>
+    </tr>
+
+    <?php
+    // Database connection
+    $conn = pg_connect("host=localhost dbname=your_database user=your_username password=your_password");
+
+    if (!$conn) {
+      die("Connection failed: " . pg_last_error());
+    }
+
+    // Fetch records from the database
+    $sql = "SELECT * FROM product";
+    $result = pg_query($conn, $sql);
+
+    if (pg_num_rows($result) > 0) {
+      while ($row = pg_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>" . $row["itemcode"] . "</td>";
+        echo "<td>" . $row["itemname"] . "</td>";
+        echo "<td>" . $row["unitprice"] . "</td>";
+        echo "</tr>";
+      }
+    } else {
+      echo "<tr><td colspan='3'>No records found</td></tr>";
+    }
+
+    pg_close($conn);
+    ?>
+
+  </table>
+</body>
+</html>
